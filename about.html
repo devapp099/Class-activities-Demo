@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>برنامج الأنشطة الصفية - تعريف وشرح</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"/>
+    <style>
+        :root {
+            --main: #0ea5e9;
+            --main-dark: #0369a1;
+            --accent: #fbbf24;
+            --bg: #f8fafc;
+            --white: #fff;
+            --card: #e0f2fe;
+            --shadow: 0 8px 32px rgba(14,165,233,0.13);
+            --radius: 26px;
+            --transition: 0.4s cubic-bezier(.4,2,.3,1);
+        }
+        body {
+            font-family: 'Cairo', Tahoma, Arial, sans-serif;
+            background: linear-gradient(120deg, #e0e7ef 0%, var(--main) 100%);
+            color: #1e293b;
+            margin: 0;
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background: radial-gradient(circle at 80% 10%, #fbbf24 0%, transparent 60%),
+                        radial-gradient(circle at 10% 90%, #0ea5e9 0%, transparent 70%),
+                        radial-gradient(circle at 50% 50%, #38bdf8 0%, transparent 80%);
+            opacity: 0.16;
+            z-index: 0;
+            pointer-events: none;
+            filter: blur(2px);
+            animation: bgmove 18s linear infinite alternate;
+        }
+        @keyframes bgmove {
+            0% { background-position: 80% 10%, 10% 90%, 50% 50%; }
+            100% { background-position: 60% 30%, 30% 80%, 60% 60%; }
+        }
+        .landing-container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 48px 18px 32px 18px;
+            position: relative;
+            z-index: 2;
+        }
+        .section-sep {
+            width: 100px;
+            height: 5px;
+            background: linear-gradient(90deg, var(--main-dark), var(--accent));
+            border-radius: 8px;
+            margin: 32px auto 32px auto;
+            opacity: 0.18;
+        }
+        .hero {
+            background: linear-gradient(120deg, var(--white) 80%, var(--accent) 120%);
+            border-radius: var(--radius);
+            box-shadow: 0 8px 40px #0ea5e91a, 0 1.5px 8px #fbbf2433;
+            padding: 54px 32px 38px 32px;
+            text-align: center;
+            margin-bottom: 38px;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInDown 1.1s cubic-bezier(.4,2,.3,1);
+            backdrop-filter: blur(2px);
+        }
+        @keyframes fadeInDown {
+            0% { opacity: 0; transform: translateY(-60px) scale(0.98); }
+            100% { opacity: 1; transform: none; }
+        }
+        .hero h1 {
+            font-size: 3.1rem;
+            color: var(--main-dark);
+            margin-bottom: 12px;
+            letter-spacing: 1px;
+            font-weight: 800;
+            text-shadow: 0 2px 12px #bae6fd44;
+        }
+        .hero p {
+            font-size: 1.35rem;
+            color: #334155;
+            margin-bottom: 0;
+            font-weight: 500;
+        }
+        h2 {
+            color: var(--main-dark);
+            margin-top: 0;
+            font-size: 2.1rem;
+            font-weight: 800;
+            letter-spacing: 0.5px;
+        }
+        .section {
+            margin-bottom: 38px;
+            background: var(--card);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            padding: 32px 28px 22px 28px;
+            animation: fadeInUp 1.2s cubic-bezier(.4,2,.3,1);
+            position: relative;
+        }
+        @keyframes fadeInUp {
+            0% { opacity: 0; transform: translateY(60px) scale(0.98); }
+            100% { opacity: 1; transform: none; }
+        }
+        ul {
+            padding-right: 24px;
+        }
+        .activity-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 32px;
+            margin-top: 18px;
+        }
+        .activity-card {
+            background: linear-gradient(120deg, #f1f5f9 70%, #e0f2fe 100%);
+            border-radius: 20px;
+            padding: 32px 18px 22px 18px;
+            box-shadow: 0 4px 18px #0ea5e91a, 0 1.5px 8px #fbbf2433;
+            transition: transform 0.25s cubic-bezier(.4,2,.3,1), box-shadow 0.25s, border 0.25s;
+            position: relative;
+            overflow: hidden;
+            animation: fadeInCard 1.2s cubic-bezier(.4,2,.3,1);
+            border: 2px solid #e0e7ef;
+            text-align: center;
+        }
+        .activity-card:hover {
+            transform: translateY(-10px) scale(1.045) rotate(-1deg);
+            box-shadow: 0 12px 36px #0ea5e933, 0 2px 12px #fbbf2433;
+            border: 2px solid var(--main);
+            background: linear-gradient(120deg, #e0f2fe 60%, #bae6fd 100%);
+        }
+        @keyframes fadeInCard {
+            0% { opacity: 0; transform: scale(0.95) translateY(30px); }
+            100% { opacity: 1; transform: none; }
+        }
+        .activity-card h4 {
+            margin: 0 0 8px 0;
+            color: var(--main);
+            font-size: 1.25rem;
+            font-weight: 800;
+        }
+        .activity-card p {
+            color: #334155;
+            font-size: 1.08rem;
+            font-weight: 500;
+        }
+        .activity-icon {
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 60px;
+            height: 60px;
+            margin-left: auto;
+            margin-right: auto;
+            border-radius: 50%;
+            background: linear-gradient(120deg, #e0f2fe 60%, #bae6fd 100%);
+            box-shadow: 0 2px 8px #bae6fd33;
+            border: 1.5px solid #e0e7ef;
+        }
+        .features {
+            background: #f1f5f9;
+            border-radius: 14px;
+            padding: 18px 14px;
+            box-shadow: 0 2px 8px #bae6fd33;
+        }
+        .footer {
+            text-align:center; color:#64748b; font-size:15px; margin-top: 32px;
+        }
+        /* مؤثرات عائمة */
+        .bubble {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.18;
+            pointer-events: none;
+            animation: float 8s infinite ease-in-out;
+        }
+        .bubble1 { width: 120px; height: 120px; background: var(--main); left: 2%; top: 8%; animation-delay: 0s; }
+        .bubble2 { width: 80px; height: 80px; background: var(--accent); right: 6%; top: 18%; animation-delay: 2s; }
+        .bubble3 { width: 60px; height: 60px; background: #38bdf8; left: 12%; bottom: 10%; animation-delay: 4s; }
+        .bubble4 { width: 100px; height: 100px; background: #fbbf24; right: 10%; bottom: 8%; animation-delay: 1s; }
+        @keyframes float {
+            0% { transform: translateY(0) scale(1); }
+            50% { transform: translateY(-30px) scale(1.08); }
+            100% { transform: translateY(0) scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="landing-container">
+        <div class="bubble bubble1"></div>
+        <div class="bubble bubble2"></div>
+        <div class="bubble bubble3"></div>
+        <div class="bubble bubble4"></div>
+        <section class="hero">
+            <h1>برنامج الأنشطة الصفية</h1>
+            <p>منصة تعليمية تفاعلية متكاملة، مصممة لتعزيز التفاعل والمشاركة بين الطلاب والمعلمين داخل الصف، من خلال مجموعة متنوعة من الألعاب والأنشطة التعليمية الحديثة.</p>
+        </section>
+        <div class="section-sep"></div>
+        <div class="section" style="text-align:center;">
+            <h2>أهم ما يميز المنصة</h2>
+            <ul style="text-align:right; max-width:700px; margin:18px auto 0 auto; font-size:1.08rem; line-height:2;">
+                <li>ربط مباشر ببيانات الطلاب (الاسم والصف) مع كل نشاط، مما يتيح للمعلم تنفيذ أي نشاط في أي وقت دون الحاجة لإعادة إدخال البيانات.</li>
+                <li>تصميم الأنشطة بأسلوب أسئلة شفوية أو مهام عملية يقوم بها الطالب داخل الصف، مما يجعل التفاعل لحظيًا وفعّالًا.</li>
+                <li>تسهيل إعداد الأنشطة للمعلم، حيث يمكنه تجهيز أسئلته أو بطاقاته أو مهامه في حقيبته، ثم تفعيل النشاط بسهولة من خلال المنصة.</li>
+                <li>أدوات تقييم فورية تعرض نتائج مشاركة الطلاب لحظة بلحظة، مما يساعد في متابعة الأداء وتحديد نقاط القوة والضعف.</li>
+            </ul>
+        </div>
+        <div class="section" style="text-align:center;">
+            <h2>الفوائد للمعلم والطالب</h2>
+            <ul style="text-align:right; max-width:700px; margin:18px auto 0 auto; font-size:1.08rem; line-height:2;">
+                <li>توفير الوقت والجهد في الإعداد المسبق للأنشطة.</li>
+                <li>جعل الحصة أكثر متعة وحيوية.</li>
+                <li>تعزيز التواصل والتفاعل بين جميع الطلاب.</li>
+                <li>دعم أساليب التعلم النشط وتشجيع المشاركة الإيجابية.</li>
+            </ul>
+        </div>
+        <div class="section" id="activities">
+            <h2>الأنشطة التفاعلية</h2>
+            <div class="activity-list">
+                <div class="activity-card">
+                    <span class="activity-icon">🎯</span>
+                    <h4>الاسم العشوائي</h4>
+                    <p>اختيار طالب بشكل عشوائي لبدء المشاركة أو تنفيذ نشاط صفي بطريقة عادلة ومثيرة. يُستخدم لتحفيز الطلاب على المشاركة دون تحيز.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🎴</span>
+                    <h4>بطاقات الأسماء الذكية</h4>
+                    <p>نظام بطاقات تفاعلي مع مهام متنوعة وأنماط اختيار متعددة، يُستخدم لتحفيز الطلاب وتوزيع المهام أو الجوائز بشكل ذكي.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">⏱️</span>
+                    <h4>المؤقت التفاعلي</h4>
+                    <p>مؤقت مرئي ومسموع يساعد في ضبط الأنشطة والمهام الصفية بدقة وفعالية. يُستخدم لإدارة الوقت أثناء المسابقات أو الأنشطة الجماعية.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🧩</span>
+                    <h4>مسابقة الحروف</h4>
+                    <p>لعبة تفاعلية بين فريقين تعتمد على الحروف والسرعة في التفكير. تُستخدم لتنمية مهارات اللغة والتفكير السريع.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">💣</span>
+                    <h4>القنبلة المؤقتة</h4>
+                    <p>لعبة تعليمية مثيرة لاختبار المعرفة تحت الضغط. تُستخدم لزيادة الحماس وتحفيز سرعة الاستجابة لدى الطلاب.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🏆</span>
+                    <h4>مملكة التحديات الذكية</h4>
+                    <p>نظام تعلم تفاعلي متقدم بالذكاء الاصطناعي مع تأثيرات كونية ومعارك ملحمية. يُستخدم لتقديم تحديات متنوعة وتطوير مهارات التفكير العليا.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🥇</span>
+                    <h4>تحدي الفرق الكلاسيكي</h4>
+                    <p>مسابقة تفاعلية بين فريقين مع نظام نقاط ومؤثرات صوتية. تُستخدم لتعزيز العمل الجماعي وروح المنافسة.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">✍️</span>
+                    <h4>كوّن قصة</h4>
+                    <p>نشاط قصصي تفاعلي فردي أو جماعي لتطوير مهارات الكتابة الإبداعية والتعبير عن الأفكار.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🗳️</span>
+                    <h4>صوّت وقرر</h4>
+                    <p>نظام تصويت فصلي تفاعلي مع عرض النتائج بالرسوم البيانية. يُستخدم لجمع آراء الطلاب أو اتخاذ قرارات صفية بشكل ديمقراطي.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🕵️</span>
+                    <h4>من هو؟</h4>
+                    <p>تحدٍّ تفاعلي لاختبار الذكاء في كشف هوية الطالب من خلال تلميحات. يُستخدم لتنمية مهارات الاستنتاج والملاحظة.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🏰</span>
+                    <h4>مونوبولي سلطنة عُمان</h4>
+                    <p>لعبة استراتيجية تفاعلية لاستكشاف معالم وثقافة سلطنة عُمان. تُستخدم لتعزيز المعرفة الجغرافية والثقافية.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🏁</span>
+                    <h4>سباق المعرفة</h4>
+                    <p>سباق تعليمي بين الفرق للوصول لخط النهاية عبر الإجابات الصحيحة والسريعة. يُستخدم لتحفيز سرعة التفكير والعمل الجماعي.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🏯</span>
+                    <h4>برج الأسماء</h4>
+                    <p>لعبة تعليمية تفاعلية تجمع بين المرح والتعلم، حيث يبني الطلاب برجاً من أسمائهم ويختبرون معرفتهم للوصول إلى القمة.</p>
+                </div>
+                <div class="activity-card">
+                    <span class="activity-icon">🏛️</span>
+                    <h4>هرم المعرفة</h4>
+                    <p>لعبة تعليمية تفاعلية مبنية على تصنيف بلوم للتفكير العليا، تُستخدم لتطوير مستويات التفكير الستة لدى الطلاب.</p>
+                </div>
+            </div>
+        </div>
+        <div class="section">
+            <h2>متطلبات البرنامج</h2>
+            <div class="features">
+                <ul style="margin-bottom:18px;">
+                    <li><span style='font-size:1.2em;'>🏫</span> بيانات المدرسة: <span style="color:#0369a1">معلومات المدرسة والإعدادات الأساسية</span></li>
+                    <li><span style='font-size:1.2em;'>📅</span> أوقات الحصص: <span style="color:#0369a1">تحديد الجدول الزمني للحصص</span></li>
+                    <li><span style='font-size:1.2em;'>👥</span> قائمة أسماء الطلاب: <span style="color:#0369a1">حسب الفصول الدراسية</span></li>
+                    <li><span style='font-size:1.2em;'>🖼️</span> الشعار الرسمي للمدرسة</li>
+                </ul>
+                <ul>
+                    <li>يعمل البرنامج كتطبيق ويب (Web App) بالكامل عبر المتصفح.</li>
+                    <li>يتطلب اتصالاً بالإنترنت أثناء الاستخدام.</li>
+                    <li>يفضل استخدام متصفح حديث (Chrome, Edge, Firefox, Safari).</li>
+                    <li>لا يحتاج إلى تثبيت أو تحميل برامج إضافية.</li>
+                </ul>
+                <p style="color:#e11d48; font-weight:600; margin-top:10px;">تنبيه: يجب التأكد من وجود اتصال إنترنت مستقر أثناء تشغيل البرنامج ليستفيد المعلمون والطلاب من جميع المزايا.</p>
+            </div>
+        </div>
+        <div class="section">
+            <h2>التجريب والتشغيل</h2>
+            <div class="features" style="text-align:right;">
+                <ul style="margin-bottom:18px; font-size:1.08rem; line-height:2;">
+                    <li>تم في مرحلة التجريب توليد بيانات مدرسة افتراضية باستخدام الذكاء الاصطناعي تضم عدة شعب، وتم تزويدنا بـ:</li>
+                    <li style="list-style:none;">
+                        <ul style="margin-top:8px;">
+                            <li>📄 ملف Excel يحتوي بيانات الطلاب والفصول.</li>
+                            <li>🕒 ملف نصي بأوقات الحصص.</li>
+                            <li>🖼️ صورة شعار المدرسة.</li>
+                        </ul>
+                    </li>
+                </ul>
+                <p>بعد عملية الدمج والتجهيز، تم تزويد المدرسة برابطها الخاص لتجربة البرنامج، وهذه النتيجة:</p>
+                <p style="font-size:1.15em; margin:12px 0;">
+                    <span style="font-size:1.3em;">🔗</span> <a href="https://a7mdooh.github.io/Class-activities-1565/" target="_blank" style="color:#0ea5e9; font-weight:700; text-decoration:underline;">النتيجة هنا</a>
+                </p>
+                <p>يمكنك الدخول على الرابط وتجربة جميع مزايا البرنامج.</p>
+                <p style="margin-top:18px;">
+                    <a href="#" style="background:#0ea5e9; color:#fff; padding:12px 32px; border-radius:30px; font-weight:700; font-size:1.1em; text-decoration:none; box-shadow:0 2px 8px #0ea5e933; transition:background 0.2s;">📩 لطلب البرنامج اضغط هنا</a>
+                </p>
+            </div>
+        </div>
+        <div class="footer">
+            <p>جميع الحقوق محفوظة &copy; 2025 - برنامج الأنشطة الصفية</p>
+        </div>
+    </div>
+</body>
+</html>
